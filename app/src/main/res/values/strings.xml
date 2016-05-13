@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">GeeksDictionary</string>
+    <string name="searchHint">请输入查询词汇</string>
+    <string name="addToNewWords">加入生词本</string>
+    <string name="searchWebMeaning">网络释义</string>
+    <string name="searchWord">查单词</string>
+    <string name="newWordsBook">生词本</string>
+    <string name="notEmpty">输入值不能为空</string>
+    <string name="notFoundWord">抱歉,没有找到该单词.搜索网络释义试试?</string>
+    <string name="wordsToLong">要翻译的文本过长</string>
+    <string name="canNotTranslate">无法进行有效的翻译</string>
+    <string name="notSupportType">不支持的语言类型</string>
+    <string name="uselessKey">无效的key</string>
+    <string name="searchSucceed">查询成功</string>
+    <string name="extractError">提取异常</string>
+    <string name="nowebMean">啊哦,没有查到网络释义</string>
+    <string name="webFailed">网络链接失败</string>
+    <string name="add_new_words_succeed">加入生词本成功</string>
+    <string name="delete_new_words">删除生词</string>
+</resources>

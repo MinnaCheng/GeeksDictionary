@@ -1,14 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.androidapps.cm.geeksdictionary.ui.NewWordsActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.androidapps.cm.geeksdictionary.ui.NewWordsActivity">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:gravity="center_vertical">
+
+        <ImageButton
+            android:id="@+id/ivTitleBtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:includeFontPadding="false"
+            android:background="#00000000"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
+            android:src="@drawable/icon_btn_back_black"/>
+
+        <TextView
+            android:id="@+id/tVMyNewWords"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="60dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/myNewWords"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageButton
+            android:id="@+id/iVReflash"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:layout_centerVertical="true"
+            android:src="@drawable/repeat"/>
+    </RelativeLayout>
+
 
     <ListView
         android:id="@+id/listViewWords"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-         />
+        />
+
 </LinearLayout>

@@ -17,4 +17,5 @@
     <string name="webFailed">网络链接失败</string>
     <string name="add_new_words_succeed">加入生词本成功</string>
     <string name="delete_new_words">删除生词</string>
+    <string name="myNewWords">我的生词本</string>
 </resources>

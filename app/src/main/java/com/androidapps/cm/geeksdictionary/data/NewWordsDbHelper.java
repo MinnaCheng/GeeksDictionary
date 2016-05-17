@@ -16,8 +16,8 @@ import android.util.Log;
 public class NewWordsDbHelper extends SQLiteOpenHelper {
     public static final String CREATE_NEW_WORDS = "CREATE TABLE new_words ("
             + "new_words_id integer primary key autoincrement, "
-            + "word text, "
-            + "meaning text)";
+            + "word text not null UNIQUE, "
+            + "meaning text not null)";
     private Context mContext;
 
     public NewWordsDbHelper(Context context){

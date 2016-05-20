@@ -10,12 +10,9 @@ import com.androidapps.cm.geeksdictionary.R;
 import com.androidapps.cm.geeksdictionary.utils.Constants;
 
 public class MainActivity extends TabActivity {
-   // private NewWordsDbHelper newWordsDbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // newWordsDbHelper = new NewWordsDbHelper(this);
-       // newWordsDbHelper.getWritableDatabase();
         setContentView(R.layout.activity_main);
         TabHost tabHost = getTabHost();
         LayoutInflater.from(this)

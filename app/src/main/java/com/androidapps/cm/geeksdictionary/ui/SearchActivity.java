@@ -90,7 +90,7 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
                 break;
             case R.id.btnSearchWeb:
                 //搜索网络释义
-                setWebMean(getWords());
+                setWebMean(mTVWord.getText().toString());
                 break;
             case R.id.btnAddToNewWords:
                 //加入生词本操作
@@ -104,12 +104,12 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
 
     private void addOrDeleteNewWords() {
         String text = mBtnNewWords.getText().toString();
-        if (text.equals(R.string.addToNewWords)){
-            Log.d("----","addNewWords");
+        if (text.equals(R.string.addToNewWords)) {
+            Log.d("----", "addNewWords");
             insertNewWords();
             mBtnNewWords.setText(R.string.delete_new_words);
-        }else if(text.equals(R.string.delete_new_words)){
-            Log.d("----","deleteNewWords");
+        } else if (text.equals(R.string.delete_new_words)) {
+            Log.d("----", "deleteNewWords");
             deleteNewWords();
             mBtnNewWords.setText(R.string.addToNewWords);
         }
@@ -117,11 +117,11 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
     }
 
     private void deleteNewWords() {
-        if(insertStatus == 1){
-            Log.d("----","deleteWords");
+        if (insertStatus == 1) {
+            Log.d("----", "deleteWords");
             String word = mTVWord.getText().toString();
             newWordsPresenter.deleteWords(word);
-            Toast.makeText(this,"删除成功",Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "删除成功", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -129,10 +129,15 @@ public class SearchActivity extends ActionBarActivity implements View.OnClickLis
         String word = mTVWord.getText().toString();
         String meaning = presenter.loadChinese(word);
         if (null != meaning && !meaning.isEmpty()) {
-            newWordsPresenter.insertWords(word,meaning);
+            try {
+                newWordsPresenter.insertWords(word, meaning);
+            } catch (Exception e) {
+                Toast.makeText(this, R.string.addFailed, Toast.LENGTH_LONG).show();
+                return;
+            }
             insertStatus = 1;
-            Toast.makeText(this, R.string.add_new_words_succeed,Toast.LENGTH_SHORT).show();
-        }else{
+            Toast.makeText(this, R.string.add_new_words_succeed, Toast.LENGTH_SHORT).show();
+        } else {
             insertStatus = 0;
         }
 

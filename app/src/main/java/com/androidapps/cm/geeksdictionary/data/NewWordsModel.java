@@ -47,8 +47,6 @@ public class NewWordsModel implements INewWordsModel {
 
     @Override
     public void insertWords(String English, String Chinese) {
-       // String insertSQL = "insert into new_words (word,meaning) values(?,?)";
-       // mSqlDb.execSQL(insertSQL,new String[]{English,Chinese});
         mSqlDb.execSQL("insert into new_words (word,meaning) values('"+English+"', '"+Chinese+"')");
     }
 

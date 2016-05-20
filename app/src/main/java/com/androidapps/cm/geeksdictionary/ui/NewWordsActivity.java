@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
@@ -16,12 +17,14 @@ import com.androidapps.cm.geeksdictionary.data.NewWord;
 import com.androidapps.cm.geeksdictionary.presenter.NewWordsPresenter;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 
 public class NewWordsActivity extends ActionBarActivity implements View.OnClickListener {
     NewWordsPresenter newWordsPresenter;
-    private List<NewWord> list ;
+    private List<NewWord> list;
     private List<NewWord> listAfterSort;
     private ImageButton IbBack;
     private ImageButton IbReflash;
@@ -33,16 +36,16 @@ public class NewWordsActivity extends ActionBarActivity implements View.OnClickL
         setContentView(R.layout.activity_new_words);
         initView();
         getNewWordsList();
-        //listAfterSort = sortNewWords(list);
-        setListView(list);
+        listAfterSort = sortNewWords(list);
+        setListView(listAfterSort);
 
     }
 
     private void initView() {
-        IbBack = (ImageButton)findViewById(R.id.ivTitleBtnBack);
-        IbReflash = (ImageButton)findViewById(R.id.iVReflash);
-        IbDelete = (ImageButton)findViewById(R.id.IbDelete);
-       // IbDelete.setOnClickListener(this);
+        IbBack = (ImageButton) findViewById(R.id.ivTitleBtnBack);
+        IbReflash = (ImageButton) findViewById(R.id.iVReflash);
+        IbDelete = (ImageButton) findViewById(R.id.IbDelete);
+        // IbDelete.setOnClickListener(this);
         IbReflash.setOnClickListener(this);
         IbBack.setOnClickListener(this);
     }
@@ -59,17 +62,17 @@ public class NewWordsActivity extends ActionBarActivity implements View.OnClickL
     }
 
     private void setListView(final List<NewWord> listAfterSort) {
-        NewWordsAdapter newWordsAdapter = new NewWordsAdapter(
+        final NewWordsAdapter newWordsAdapter = new NewWordsAdapter(
                 NewWordsActivity.this, R.layout.new_words_item, listAfterSort);
-        ListView listView = (ListView)findViewById(R.id.listViewWords);
+        ListView listView = (ListView) findViewById(R.id.listViewWords);
         listView.setAdapter(newWordsAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                NewWord newWord = list.get(position);
-                Intent intent = new Intent(NewWordsActivity.this,WordsDetailActivity.class);
-                intent.putExtra("word",newWord.getWord());
-                intent.putExtra("mean",newWord.getMeaing());
+                NewWord newWord = listAfterSort.get(position);
+                Intent intent = new Intent(NewWordsActivity.this, WordsDetailActivity.class);
+                intent.putExtra("word", newWord.getWord());
+                intent.putExtra("mean", newWord.getMeaing());
                 startActivity(intent);
             }
         });
@@ -77,14 +80,16 @@ public class NewWordsActivity extends ActionBarActivity implements View.OnClickL
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                IbDelete.setVisibility(View.VISIBLE);
-                dialog();
+                //    IbDelete.setVisibility(View.VISIBLE);
+                dialog(position, newWordsAdapter);
                 return false;
             }
         });
     }
 
-    protected void dialog() {
+    protected void dialog(int pos, final NewWordsAdapter newWordsAdapter) {
+        final int position = pos;
+        final NewWordsAdapter adapter = newWordsAdapter;
         AlertDialog.Builder builder = new AlertDialog.Builder(NewWordsActivity.this);
         builder.setMessage("确认删除该生词吗？");
 
@@ -95,8 +100,13 @@ public class NewWordsActivity extends ActionBarActivity implements View.OnClickL
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-
-                NewWordsActivity.this.finish();
+                NewWord newWord = listAfterSort.get(position);
+                Log.d("word", newWord.toString());
+                String English = newWord.getWord();
+                newWordsPresenter.deleteWords(English);
+                listAfterSort.remove(position);
+                adapter.notifyDataSetChanged();
+                //NewWordsActivity.this.finish();
             }
         });
 
@@ -113,23 +123,28 @@ public class NewWordsActivity extends ActionBarActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.ivTitleBtnBack:
-                Intent intent = new Intent(NewWordsActivity.this,MainActivity.class);
+                Intent intent = new Intent(NewWordsActivity.this, MainActivity.class);
                 startActivity(intent);
                 break;
             case R.id.iVReflash:
                 getNewWordsList();
-                //listAfterSort = sortNewWords(list);
-                setListView(list);
+                listAfterSort = sortNewWords(list);
+                setListView(listAfterSort);
                 break;
             case R.id.IbDelete:
                 break;
         }
     }
 
-    /*private List<NewWord> sortNewWords(List<NewWord> list) {
-
-        return;
-    }*/
+    private List<NewWord> sortNewWords(List<NewWord> list) {
+        Collections.sort(list, new Comparator<NewWord>() {
+            @Override
+            public int compare(NewWord lhs, NewWord rhs) {
+                return lhs.getWord().compareTo(rhs.getWord());
+            }
+        });
+        return list;
+    }
 }

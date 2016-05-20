@@ -12,24 +12,25 @@ import java.util.List;
 // | CreateTime: 16/5/9 
 // +----------------------------------------------------------------------
 // | Author:     cm
-// +----------------------------------------------------------------------
-// | CopyRight:  http://www.boxfish.cn
-// +----------------------------------------------------------------------
+
 public class NewWordsPresenter {
     private INewWordsModel iNewWordsModel;
     private Context mContext;
 
-    public NewWordsPresenter(Context context){
+    public NewWordsPresenter(Context context) {
         this.mContext = context;
         iNewWordsModel = new NewWordsModel(context);
     }
-    public void insertWords(String English,String Chinese){
-        iNewWordsModel.insertWords(English,Chinese);
+
+    public void insertWords(String English, String Chinese) {
+        iNewWordsModel.insertWords(English, Chinese);
     }
-    public void deleteWords(String English){
+
+    public void deleteWords(String English) {
         iNewWordsModel.deleteWords(English);
     }
-    public List<NewWord> getNewWords(){
-       return iNewWordsModel.getNewWords();
+
+    public List<NewWord> getNewWords() {
+        return iNewWordsModel.getNewWords();
     }
 }

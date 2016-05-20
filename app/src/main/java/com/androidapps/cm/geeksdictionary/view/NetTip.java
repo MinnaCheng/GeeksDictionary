@@ -5,8 +5,7 @@ package com.androidapps.cm.geeksdictionary.view;
 // +----------------------------------------------------------------------
 // | Author:     cm
 // +----------------------------------------------------------------------
-// | CopyRight:  http://www.boxfish.cn
-// +----------------------------------------------------------------------
+
 public interface NetTip {
     void show(String msg);
 }

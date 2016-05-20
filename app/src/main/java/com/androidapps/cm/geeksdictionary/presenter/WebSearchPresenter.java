@@ -14,21 +14,19 @@ public class WebSearchPresenter {
     NetTip netTip;
 
 
-    public WebSearchPresenter(Context context,NetTip nettip) {
-        this.context=context;
-        this.netTip=nettip;
-        mJson = new AnalyzeJson(context,nettip);
+    public WebSearchPresenter(Context context, NetTip nettip) {
+        this.context = context;
+        this.netTip = nettip;
+        mJson = new AnalyzeJson(context, nettip);
     }
 
     public void setContent(String content) {
         mJson.setContent(content);
     }
-    public String analizingOfJson(){
+
+    public String analizingOfJson() {
         return mJson.analyzeOfJson();
     }
 
-    /*public String sendToast(){
-        return mJson.sendToast();
-    }*/
 
 }
